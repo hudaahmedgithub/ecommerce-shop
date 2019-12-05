@@ -1,0 +1,62 @@
+/*
+    // Include this files to html page
+
+    -- bootstrap RTL css
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-cSfiDrYfMj9eYCidq//oGXEkMc0vuTxHXizrMOFAaPsLt1zoCUVnSsURN+nef1lj"
+    crossorigin="anonymous">
+
+    -- bootstrap RTL Js
+    <script src="https://cdn.rtlcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-B4D+9otHJ5PJZQbqWyDHJc6z6st5fX3r680CYa0Em9AUG6jqu5t473Y+1CTZQWZv"
+    crossorigin="anonymous"></script>
+
+
+
+*/
+
+
+
+/* Start Main Rules */
+html {
+  direction: rtl;
+}
+.mr-5 {
+    margin-left: 5px;
+}
+.ml-5 {
+    margin-right: 5px;
+}
+.pull-left {
+    float: right!important;
+}
+.pull-right {
+    float: left!important;
+}
+.text-left {
+    text-align: right;
+}
+.text-right {
+    text-align: left;
+}
+
+
+/* Start topbar */
+.topBar ul.topBarNav li {
+    margin-left: -4px;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+}
+.topBar ul.topBarNav li ul {
+    left: 4px;
+    margin-left: -4px;
+    right: auto;
+}
+
+/* Start middle bar */
+.middleBar .header-items .header-item a sub {
+    left: -8px;
+    right: auto;
+}
+
+/* Start main navbar */
+.navbar-default .navbar-collapse li.dropdown.megaDropMenu .dropdown-menu li ul li:first-child{
+    padding: 20px 15px 5px 0px;
+}

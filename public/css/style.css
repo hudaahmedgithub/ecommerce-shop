@@ -1,0 +1,315 @@
+/**
+* App Resets
+**/
+a, a:hover{text-decoration: none;}
+/* width */
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    border-radius: 10px;
+}
+
+
+/**
+* App Custom Classes
+**/
+.d-none{display: none;}
+.orange_txt{color: #b79656 !important}
+
+@media (max-width: 590px){
+    .display-none-sm{
+        display: none!important;
+    }
+}
+.popover{
+    direction: rtl;
+    max-width: 400px;
+}
+
+/**
+* App Font
+**/
+
+*{font-family: 'Tajawal';}
+/* *{font-family: 'Noto Naskh Arabic';} */
+
+/**
+* App Header
+**/
+
+.header{
+    background-color: #131313;
+    padding: 10px 50px;
+}
+
+.header *{color: #ffcc00;}
+.header a{font-family: 'Times New Roman', Times, serif}
+.header a:hover{color: #fff;}
+
+
+/**
+* APP Scroll Button 
+**/
+.scroll-btn{
+    position: fixed;
+    bottom: 30px;
+    right: 15px;
+    background-color: #ffe9aa;
+    color: #b91a1a;
+    z-index: 11111;
+    font-size: 20px;
+    display: none;
+}
+.scroll-btn:hover, .scroll-btn:focus{
+    background-color: #b91a1a;
+    color: #ffe9aa;
+}
+/**
+* App Nav
+**/
+.appnav{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.appnav a{
+    color: #616262;
+    font-weight: bolder;
+    font-size: 20px
+}
+
+.appnav .usr_img{
+    border-radius: 50%;
+    position: relative;
+}
+
+.appnav ul li a.active{color: #b79656 !important}
+
+.logo img{
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+@media (max-width: 590px){
+    .logo img{
+        position: relative;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        animation-name: none;
+        border-radius: 0;
+    }
+}
+/**
+* App Carousel
+**/
+
+.carousel-indicators li{background-color: #ffb91d;}
+.carousel{height: 390px!important;}
+
+/**
+* App Items Info
+**/
+.item_info{
+    position: absolute;
+    left: 0;
+    width: 400px;
+    top: 0;
+    opacity: 0.9;
+    z-index: 5;
+}
+
+
+.item_buttons {margin: 5px;}
+
+.item_buttons a{
+    transform: skew(-33deg);
+    width: 75px;
+}
+
+.search-item{
+    position: absolute;
+    margin-top: -10px;
+    width: 300px;
+    height: auto;
+    left: 0;
+    background-color: #616262;
+    color: #fff;
+    z-index: 10;
+}
+
+@media (max-width: 590px){
+    .search-item{
+        position: relative;
+        width: 100%;
+    }
+}
+
+.sub_title_brd{max-width: 150px;}
+
+.sub_title_brd hr{
+    border-bottom: 2px solid #ffb91d;
+    border-width: 3px;
+    max-width: 100px;
+}
+
+
+.item_info .item_content{
+    background-color: #131313;
+    color: #fff;
+    padding: 15px;
+    z-index: 3;
+}
+
+.item_info .item_content::after{
+    transform: skew(0, -7deg);
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 400px;
+    height: 87px;
+    background-color: #131313;
+    z-index: -1;
+}
+/**
+* App Contact Us Section
+**/
+
+.contact-us{
+    background:linear-gradient(0deg,rgba(0,0,0,0.9),rgba(0,0,0,0.6)),url('../imgs/Arcitectures and houses/4.png') fixed;
+    background-size:cover;
+    color: #fff;
+}
+
+.message_us form input, .message_us form textarea{
+    background-color: rgba(0, 0, 0, .0) !important;
+    opacity: 0.8;
+    color: #fff;
+    font-weight: bolder;
+    padding: 20px;
+    transition:all .3s ease;
+
+}
+
+.message_us form input::placeholder,
+.message_us form textarea::placeholder 
+{
+    color: #fff;
+}
+
+.message_us form input:focus,
+.message_us form textarea:focus
+{
+    color: #fff;
+    border: 3px solid #fc0;
+}
+
+.seperator{
+    border-right: 1px solid #fff;
+}
+/**
+* App Products Page
+**/
+
+.products .price{
+    position: absolute;
+    top: 15px;
+    background-color: #fc0;
+    color: #000;
+    font-weight: bold;
+    padding: 10px;
+    box-shadow: 1px 1px 10px 0px #000;
+}
+
+.products_sider{
+    overflow: auto;
+    white-space: nowrap;
+
+}
+
+#preview_the_products{
+    height: 100%;
+}
+
+#preview_the_products .modal-content{
+    flex-direction: row-reverse;
+}
+
+#preview_the_products .modal-body{
+    padding: 0;
+}
+/**
+* App comment
+**/
+.comment-box{
+    background-color: #f1f1f1;
+}
+
+.comment-box img{
+    box-shadow: -1px 3px 5px 0px #000;
+    border: 4px groove #ffe9aa;
+}
+
+.comment-box .sub-comment{
+    border-right: 3px solid #ddd;
+    
+}
+
+.comment{
+    position: relative;
+    background-color: #fff;
+    padding: 20px!important;
+    border-radius: 25px 0 25px 25px;
+    box-shadow: -1px 3px 3px 0px #3e3d3d73;;
+}
+
+.comment::before{
+    position: absolute;
+    content: "";
+    border-style: solid;
+    border-width: 14px 32px 5px 16px;
+    border-color: #fff transparent transparent transparent;
+    top: 0;
+    right: -31px;
+}
+
+/**
+* App Footer
+**/
+.social-icons li i{
+    padding: 10px;
+    background-color: #8F8F8F;
+    border-radius: 50%;
+    color: #fff;
+    width: 2.285714em;
+    transition:all .3s ease;
+
+}
+.social-icons li i:hover{
+    background-color: #fc0;
+    color: #000
+}

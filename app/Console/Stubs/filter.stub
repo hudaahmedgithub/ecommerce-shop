@@ -1,0 +1,19 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Database\Eloquent\Model;
+
+class DummyClass extends Model
+{
+    /**
+     * Set the DummyClass's attr
+     *
+     * @param  string $value
+     * @return string
+     */
+    public function setAttrAttribute($value)
+    {
+        $this->attributes['attr'] = $value;
+    }
+}
