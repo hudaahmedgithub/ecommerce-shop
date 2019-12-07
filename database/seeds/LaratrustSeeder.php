@@ -12,11 +12,11 @@ class LaratrustSeeder extends Seeder
      */
     public function run()
     {
-        $this->command->info('Truncating User, Role and Permission tables');
+        $this->command->info('Truncating Admin, Role and Permission tables');
         $this->truncateLaratrustTables();
 
         $config = config('laratrust_seeder.role_structure');
-        $userPermission = config('laratrust_seeder.permission_structure');
+        $adminPermission = config('laratrust_seeder.permission_structure');
         $mapPermission = collect(config('laratrust_seeder.permissions_map'));
 
         foreach ($config as $key => $modules) {
@@ -51,7 +51,7 @@ class LaratrustSeeder extends Seeder
             // Attach all permissions to the role
             $role->permissions()->sync($permissions);
 
-            $this->command->info("Creating '{$key}' user");
+            $this->command->info("Creating '{$key}' admin");
 
             // Create default user for each role
 //            $user = \App\User::create([
@@ -64,14 +64,14 @@ class LaratrustSeeder extends Seeder
         }
 
         // Creating user with permissions
-        if (!empty($userPermission)) {
+        if (!empty($adminPermission)) {
 
-            foreach ($userPermission as $key => $modules) {
+            foreach ($adminPermission as $key => $modules) {
 
                 foreach ($modules as $module => $value) {
 
                     // Create default user for each permission set
-                    $user = \App\User::create([
+                    $admin = \App\Models\Admins\Admin::create([
                         'name' => ucwords(str_replace('_', ' ', $key)),
                         'email' => $key.'@app.com',
                         'password' => bcrypt('password'),
@@ -94,7 +94,7 @@ class LaratrustSeeder extends Seeder
                 }
 
                 // Attach all permissions to the user
-                $user->permissions()->sync($permissions);
+                $admin->permissions()->sync($permissions);
             }
         }
     }
@@ -108,9 +108,9 @@ class LaratrustSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         DB::table('permission_role')->truncate();
-        DB::table('permission_user')->truncate();
-        DB::table('role_user')->truncate();
-        \App\User::truncate();
+        DB::table('permission_admin')->truncate();
+        DB::table('role_admin')->truncate();
+        \App\Models\Admins\Admin::truncate();
         \App\Role::truncate();
         \App\Permission::truncate();
         Schema::enableForeignKeyConstraints();

@@ -2,11 +2,11 @@
 
 return [
     'role_structure' => [
-        'super_admin' => [
-            'users' => 'c,r,u,d',
+        'huda' => [
+            'admins' => 'c,r,u,d',
         ],
         'admin' => [
-			'users'=>'r'
+			'admins'=>'r'
 		]
     ],
 

@@ -66,8 +66,8 @@ return [
     | The key in the array is the name of the relationship inside the roles and permissions.
     |
     */
-    'user_models' => [
-        'users' => 'App\User',
+    'admin_models' => [
+        'admins' => 'App\Models\Admins\Admin',
     ],
 
     /*
@@ -125,12 +125,12 @@ return [
         /**
          * Role - User intermediate table.
          */
-        'role_user' => 'role_user',
+        'role_admin' => 'role_admin',
 
         /**
          * Permission - User intermediate table.
          */
-        'permission_user' => 'permission_user',
+        'permission_admin' => 'permission_admin',
 
         /**
          * Permission - Role intermediate table.
@@ -151,7 +151,7 @@ return [
         /**
          * User foreign key on Laratrust's role_user and permission_user tables.
          */
-        'user' => 'user_id',
+        'admin' => 'admin_id',
 
         /**
          * Role foreign key on Laratrust's role_user and permission_role tables.

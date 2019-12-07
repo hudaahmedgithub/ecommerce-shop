@@ -21,16 +21,18 @@ Route::prefix('admin')->group(function() {
         Route::get('/', 'HomeController@index')->name('admin.home');
         Route::get('home', 'HomeController@index')->name('admin.home');
          //user routes
-      Route::resource('userss','Admins\UserController', ['as' => 'admin'])->except(['show']);
+      
+		Route::resource('users','Admins\UserController', ['as' => 'admin']);
 
         /**
          * Users Routes
          */
+		
         Route::get('users/trashed', 'Users\UsersController@trashed')->name('admin.users.trashed');
         Route::post('users/{id}/restore', 'Users\UsersController@restore')->name('admin.users.restore');
         Route::post('users/{id}/force', 'Users\UsersController@force')->name('admin.users.force');
-        Route::resource('users', 'Users\UsersController', ['as' => 'admin']);
-        
+       // Route::resource('users', 'Users\UsersController', ['as' => 'admin']);
+
         Route::get('admins/trashed', 'Admins\AdminsController@trashed')->name('admin.admins.trashed');
         Route::post('admins/{id}/restore', 'Admins\AdminsController@restore')->name('admin.admins.restore');
         Route::post('admins/{id}/force', 'Admins\AdminsController@force')->name('admin.admins.force');
