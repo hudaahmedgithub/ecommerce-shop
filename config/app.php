@@ -161,7 +161,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+       Spatie\Permission\PermissionServiceProvider::class,
 
+		//Collective\Html\HtmlServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -169,6 +171,7 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         Damas\Paytabs\PaytabsServiceProvider::class,
 		Laratrust\LaratrustServiceProvider::class,
+		
         //Admins\Providers\AppServiceProvider::class,
 
         /*
@@ -230,11 +233,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'Paytabs' => Damas\Paytabs\Facades\PaytabsFacade::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
-
+		  'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+      
     ],
 
 ];

@@ -20,7 +20,8 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('currency_id');
             $table->string('price')->default('0');
             $table->string('color')->nullable();
-            $table->integer('quantity')->default(0);
+            $table->integer('qty')->default(0);
+			$table->integer('stock')->default(1);
             $table->string('featured_image');
             $table->integer('viewed')->default(0);
 

@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Filters\Users\UsersFilter;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Products\Coupon;
-
+use Spatie\Permission\Traits\HasRoles;
 class User extends UsersFilter
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes,HasRoles;
 
     /**
      * The attributes that are mass assignable.

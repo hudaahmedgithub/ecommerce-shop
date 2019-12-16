@@ -1,0 +1,76 @@
+body{
+    background-color: #eee;
+}
+.register{
+    margin-top: 40px;
+}
+.register .register-form{
+    width: 70%;
+    margin: 0 auto 40px;
+    padding: 25px;
+    background-color: #fff;
+}
+h4{
+    text-transform: capitalize;
+    color: rgb(21, 123, 240);
+    margin-bottom: 50px;
+}
+.register form input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 20px;
+    padding: 30px 0 10px;
+}
+.register form input[id='first'],
+.register form input[id='email']{
+    margin-right: 2%;
+}
+.register form input::placeholder{
+    text-transform: capitalize;
+}
+.register .register-form>label{
+    text-transform: capitalize;
+    margin: 15px 0 15px 5px;
+}
+.login-form span{
+    float: right;
+    text-transform: capitalize;
+    color: rgb(21, 123, 240);
+}
+.register button{
+    padding: 10px 0;
+    margin-top: 20px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+.register button:hover{
+    color: white;
+}
+.register .face{
+    background-color: #4267B2;
+    margin-top: 25px;
+    color: white;
+}
+.register button .fa{
+    float: left;
+    margin-left: 20px;
+    font-size: 20px;
+    margin-top: 2px;
+}
+.register .go-login{
+    text-align: center;
+    margin-top: 20px;
+}
+.register .go-login a{
+    padding: 5px;
+    color: #fff;
+    background-color: rgb(21, 123, 240);
+}
+.register .go-login p{
+    margin-bottom: 10px;
+}
+/************************************/

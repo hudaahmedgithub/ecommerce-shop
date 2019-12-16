@@ -1,0 +1,108 @@
+.clear{
+    clear: both;
+}
+.row{
+    margin: 0;
+}
+body{
+    background-color: #eee;
+}
+.check-out{
+    margin-top: 25px;
+}
+.check-out h4{
+    text-transform: uppercase;
+    color: #aaa;
+    font-size: 18px;
+}
+.check-out .check-details>div{
+    background-color: #fff;
+    box-shadow: 0 0 5px #aaa;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.check-out .check-details>div h5{
+    text-transform: uppercase;
+    color: rgb(29, 29, 29);
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+}
+.check-out .check-details>div h5 .fa{
+    color: #999;
+    margin-right: 10px;
+    font-size: 18px;
+}
+/************************/
+.check-out .check-details .address-form{
+    padding: 20px 40px;
+    overflow: hidden;
+}
+.check-out .check-details .address-form .name{
+    width: 49%;
+    float: left;
+}
+.check-out .check-details .address-form .phone label{
+    margin-left: -50px;
+}
+.check-out .check-details .address-form .phone .st-num{
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    float: left;
+    margin: 33px 10px 0 0;
+}
+.check-out .check-details .address-form .phone input{
+    width: 92%;
+    display: inline-block;
+}
+.check-out .check-details .address-form button{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+/***********************************/
+.check-out .check-details .methods{
+    padding: 20px 40px;
+}
+.check-out .check-details .delivery-method .methods .card{
+    margin: 25px auto;
+}
+.check-out .check-details .delivery-method .methods button{
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.check-out .check-details .payment-method button{
+    background-color: rgb(21, 123, 240);
+    text-transform: uppercase;
+    color: white;
+    font-weight: 500;
+}
+.check-out .check-details .payment-method input[id="voucher"]{
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 6px 5px;
+}
+/**********************/
+.check-out .your-order{
+    margin: 25px auto;
+    background-color: #fff;
+    box-shadow: 0 0 5px #aaa;
+    border-radius: 5px
+}
+.check-out .your-order h4{
+    color: #222;
+    padding: 10px 10px 0;
+    margin: 0;
+}
+.check-out .your-order .card img{
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+.check-out .your-order .card .info{
+    float: left;
+    padding: 10px;
+}

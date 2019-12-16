@@ -1,0 +1,33 @@
+body{
+    background-color: #eee;
+}
+.forget{
+    margin: 40px auto;
+    width: 50%;
+    padding: 20px;
+    background-color: #fff;
+}
+h4{
+    text-transform: capitalize;
+    color: rgb(21, 123, 240);
+    margin-bottom: 50px;
+}
+.fa{
+    margin-right: 10px;
+}
+.forget input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 30px 10px 10px;
+}
+input:focus{
+    outline: none;
+}
+.btn{
+    text-transform: uppercase;
+    font-weight: 500;
+}

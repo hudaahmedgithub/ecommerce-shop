@@ -1,0 +1,118 @@
+a:hover{
+    text-decoration: none;
+}
+*:focus{
+    outline: none;
+}
+.row{
+    margin: 0;
+}
+@media (max-width: 992px){
+    /*********Start of index.html**************/
+    aside .form-inline .form-control{
+        width: 100%;
+    }
+    aside .brand .form-inline .fa{
+        right: -120px;
+        top: -25px;
+    }
+    aside .brand ul{
+        margin: 0;
+    }
+    /*********End of index.html**************/
+
+    /*********Start of pro-details.html**********/
+    .wrapper aside{
+        display: none;
+    }
+    .wrapper .content{
+        float: none;
+        width: 100%;
+    }
+    /*********End of pro-details.html**********/
+
+    /*********Start of check-out.html**********/
+    .check-out .your-order{
+        display: none;
+    }
+    /*********End of check-out.html************/
+}
+@media (max-width: 768px){
+
+    /*********Start of index.html*************/
+    .home-page aside{
+        display: none;
+    }
+    /*********End of index.html*************/
+
+    /*********Start of shopping-cart.html**************/
+    .shopping-cart .cart p{
+        float: none;
+        display: block;
+    }
+    /*********End of shopping-cart.html**************/
+
+    /*********Start of login.html**************/
+    .login .login-form{
+        border-right: none;
+        box-shadow: 0 0 5px #777;
+        padding: 15px;
+    }
+    .create-account{
+        margin-top: 100px;
+        box-shadow: 0 0 5px #777;
+        padding: 15px;
+    }
+    .create-account p{
+        margin-bottom: 50px;
+    }
+    /*********End of login.html**************/
+
+    /*********Start of register.html**************/
+    .register .register-form{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .register form input{
+        display: block;
+        width: 100%;
+    }
+    /*********End of register.html**************/
+
+    /*********Start of forget.html**************/
+    .forget{
+        width: 75%;
+    }
+    /*********End of forget.html**************/
+
+    /*********Start of user-home.html**************/
+    .user-home aside{
+        padding: 0;
+    }
+    .user-home section{
+        margin-top: 25px;
+    }
+    .user-home .address-book .card{
+        width: 100%;
+    }
+    .top-items .card{
+        margin-bottom: 20px;
+    }
+    /*********End of user-home.html**************/
+}
+@media (max-width: 576px){
+    /*********Start of index.html*************/
+
+    .pro-cards .card img{
+        width: 80%;
+       margin: 0 auto;
+    }
+    /*********End of index.html***************/
+
+    /*********Start of user-home.html**************/
+    .top-items .card img{
+        width: 80%;
+       margin: 0 auto;
+    }
+    /*********End of user-home.html**************/
+}

@@ -1,0 +1,113 @@
+.clear{
+    clear: both;
+}
+.row{
+    margin: 0;
+}
+body{
+    background-color: #eee;
+}
+.shopping-cart{
+    margin: 40px auto;
+}
+.cart{
+    background-color: #fff;
+    padding: 15px 25px;
+    overflow: hidden;
+    box-shadow: 0 0 3px #ccc;
+    margin-bottom: 20px;
+}
+.cart img{
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+}
+.cart .info{
+    margin-left: 115px;
+}
+.cart .info h5{
+    text-transform: capitalize;
+}
+.cart .info .select-quantity{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.cart .info .select-quantity .price{
+    float: left;
+    font-weight: 500;
+    color: rgb(21, 123, 240)
+}
+.cart .info .select-quantity label{
+    float: right;
+    margin-right: 10px;
+    font-weight: 500;
+}
+.cart .info .select-quantity select{
+    float: right;
+    padding: 3px 20px 3px 3px;
+}
+.cart .info p{
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+.cart .store-name{
+    float: left;
+    margin-top: 20px;
+}
+.cart .info span{
+    font-weight: normal;
+    
+}
+.cart .order-now{
+    margin-top: 20px;
+    float: right;
+    color: red;
+    font-weight: 500;
+
+}
+.cart a{
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.cart .save{
+    padding-right: 25px;
+    border-right: 1px solid #999;
+}
+.cart .delete{
+    padding-left: 25px;
+}
+/*****************************************/
+.right-side .total-cost{
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 3px #ccc;
+    margin-top: 35px;
+}
+.right-side .total-cost p{
+    text-transform: capitalize;
+}
+.right-side .total-cost .price{
+    font-weight: 500;
+}
+.right-side a button.bg-success{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 20px;
+}
+.right-side a:hover{
+    text-decoration: none;
+}
+.right-side .coupon{
+    background-color: #fff;
+    box-shadow: 0 0 3px #ccc;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 20px;
+}
+.right-side .coupon:hover{
+    background-color: #777;
+}

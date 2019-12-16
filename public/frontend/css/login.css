@@ -1,0 +1,71 @@
+.row{
+    margin: 0;
+}
+body{
+    background-color: #eee;
+}
+.login{
+    margin: 40px auto;
+}
+.login .login-form{
+    padding: 20px 50px;
+    border-right: 1px solid #ddd;
+    background-color: #fff;
+}
+h4{
+    text-align: center;
+    text-transform: capitalize;
+    color: rgb(21, 123, 240);
+    margin-bottom: 50px;
+}
+.login form input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 30px 10px 10px;
+}
+.login form input::placeholder{
+    text-transform: capitalize;
+}
+.login form input:focus{
+    outline: none;
+}
+.login .login-form label{
+    text-transform: capitalize;
+    margin-left: 5px;
+}
+.login-form span{
+    float: right;
+    text-transform: capitalize;
+    color: rgb(21, 123, 240);
+}
+.login button{
+    padding: 10px 0;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+.login button:hover{
+    color: white;
+}
+.login .face{
+    background-color: #4267B2;
+    margin-top: 25px;
+    color: white;
+}
+.login button .fa{
+    float: left;
+    margin-left: 20px;
+    font-size: 20px;
+    margin-top: 2px;
+}
+/************************************/
+.create-account{
+    padding: 20px 50px;
+}
+.create-account p{
+    margin-bottom: 150px;
+}

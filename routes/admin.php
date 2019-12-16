@@ -3,6 +3,12 @@
 /**
  * Backend Routes
  */
+Route::get('locale/{locale}',function ($locale){
+	App::setLocale($locale);
+	session()->put('locale', $locale);
+	
+    return redirect()->back();
+		   });
 
 Route::prefix('admin')->group(function() {
 
@@ -22,7 +28,17 @@ Route::prefix('admin')->group(function() {
         Route::get('home', 'HomeController@index')->name('admin.home');
          //user routes
       
-		Route::resource('users','Admins\UserController', ['as' => 'admin']);
+	/////roles//////
+		Route::resource('roles','Admins\RolesController', ['as' => 'admin']);
+
+		///////////////
+Route::get('new','Admins\NewController@index');
+	////////permission////
+	Route::resource('permissions','Admins\PermissionsController', ['as' => 'admin']);
+
+	  Route::get('users/trashed', 'Users\UsersController@trashed')->name('admin.users.trashed');
+        Route::post('users/{id}/restore', 'Users\UsersController@restore')->name('admin.users.restore');
+        Route::post('users/{id}/force', 'Users\UsersController@force')->name('admin.users.force');	Route::resource('users','Admins\UserController', ['as' => 'admin']);
 
         /**
          * Users Routes
@@ -31,7 +47,7 @@ Route::prefix('admin')->group(function() {
         Route::get('users/trashed', 'Users\UsersController@trashed')->name('admin.users.trashed');
         Route::post('users/{id}/restore', 'Users\UsersController@restore')->name('admin.users.restore');
         Route::post('users/{id}/force', 'Users\UsersController@force')->name('admin.users.force');
-       // Route::resource('users', 'Users\UsersController', ['as' => 'admin']);
+        Route::resource('users', 'Users\UsersController', ['as' => 'admin']);
 
         Route::get('admins/trashed', 'Admins\AdminsController@trashed')->name('admin.admins.trashed');
         Route::post('admins/{id}/restore', 'Admins\AdminsController@restore')->name('admin.admins.restore');
@@ -62,6 +78,7 @@ Route::prefix('admin')->group(function() {
         Route::get('reservations/analytics', 'Products\ReservationsController@analytics')->name('admin.reservations.analytics');
         Route::post('reservations/status/{id}', 'Products\ReservationsController@status', ['as' => 'admin'])->name('reservations.status');
         Route::resource('reservations', 'Products\ReservationsController', ['as' => 'admin']);
+		Route::post('reservations/active','Products\ReservationsController@activeStatus', ['as' => 'admin']);
 
     });
 

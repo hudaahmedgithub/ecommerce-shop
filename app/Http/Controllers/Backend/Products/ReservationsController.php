@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend\Products;
 use DB;
 use App\Models\Products\Reservation;
 use App\Http\Controllers\Backend\BackendController;
-
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 class ReservationsController extends BackendController
 {
     /**
@@ -14,6 +15,25 @@ class ReservationsController extends BackendController
      * @param \App\Models\Products\Reservation $reservation
      * @return void
      */
+	public function activeStatus(Request $request)
+	{
+		$reserv=Reservation::find($request->id);
+		$reserv->active=$request->oldValue;
+		$reserv->save();
+		 return response()->json();
+
+	}
+/*public function active($id,Request $request)
+    {
+        $reserv=Reservation::find($id);
+    $reserv->active=item;
+	//dd($reserv->active);	
+	  $reserv->save();
+
+	return redirect()->route('admin.reservations.index');
+
+}
+*/	     
     public function __construct(Reservation $reservation)
     {
         $this->model    = $reservation;

@@ -1,8 +1,7 @@
 @guest
 <div class="user_login">
     <!-- Login The User -->
-
-    <!-- Modal -->
+ <!-- Modal -->
     <div class="modal fade" id="Login_Modal" tabindex="-1" role="dialog" aria-labelledby="Login_ModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -61,5 +60,4 @@
 
     <!-- Login The User -->
 </div>
-
 @endguest

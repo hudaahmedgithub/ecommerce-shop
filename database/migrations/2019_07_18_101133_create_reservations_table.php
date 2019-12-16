@@ -19,7 +19,7 @@ class CreateReservationsTable extends Migration
             $table->enum('status', ['pending', 'scheduled', 'success'])->default('pending');
             $table->timestamp('shipping_at')->nullable();
             $table->timestamp('success_at')->nullable();
-
+            $table->boolean('active')->default('false');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();

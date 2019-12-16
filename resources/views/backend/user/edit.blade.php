@@ -21,13 +21,10 @@
                         <!-- /.bo-title -->
                     </div>
 
-                    <form action="{{ route('admin.users.update', [$user->id]) }}" method="POST" id="formUser" enctype="multipart/form-data">
+                    <form action="{{ route('admin.users.update', [$user->id]) }}" method="POST" id="formUser">
                         @csrf
                         @method("PUT")
-
-                     
-
-                        <div class="row">
+        <div class="row">
                           
                             <div class="col-md-5">
                                 <div class="form-group">

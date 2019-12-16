@@ -36,6 +36,10 @@
                                 @foreach($users as $user)
 
                                 <tr id="tr-{{ $user->id }}">
+									@if(Auth::guard('admin')->user()->hasRole('sub admin'))
+									yes
+									@endif
+									
                                     <td>{{ $i }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
@@ -65,7 +69,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5">{{ $users->links() }}</td>
+									<!--links-->
+                                    <td colspan="5"></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -89,7 +94,8 @@
 				<h4 class="modal-title" id="myModalLabel-1">{{ __('public.user.add') }}</h4>
 			</div>
 			<div class="modal-body">
-                <form action="{{ route('admin.users.store') }}" method="POST" id="formUser">
+                <form 
+			action="{{ route('admin.users.store') }}" method="POST" id="formUser">
                     @csrf
                     <div id="update"></div>
 
@@ -112,6 +118,36 @@
                         </div>
                        
                     </div>
+	<div class="form-group">
+         <label>@lang('site.permissions')</label>
+              <div class="nav-tabs-custom">
+               @php
+                   $models = ['users'];
+                    $maps = ['create', 'read', 'update', 'delete'];
+                    @endphp
+<ul class="nav nav-tabs">
+           
+       </ul>
+
+       <div class="tab-content">
+
+           @foreach ($models as $index=>$model)
+
+             <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{ $model }}">
+
+             @foreach ($roles as $index=>$role)
+             <input type="checkbox" name="roles[]" value="{{$role}}">
+                    @endforeach
+
+                 </div>
+
+         @endforeach
+
+                </div><!-- end of tab content -->
+                                
+           </div><!-- end of nav tabs -->
+                            
+</div>
 
                     <div class="form-group">
                         <label for="active">{{ __('public.user.active') }}</label>

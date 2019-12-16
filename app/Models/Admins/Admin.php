@@ -8,13 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laratrust\Traits\LaratrustUserTrait;
 use App\User;
-
+use Spatie\Permission\Traits\HasRoles;
 class Admin extends Authenticatable
 {
     use Notifiable, SoftDeletes;
-	use LaratrustUserTrait;
+	use HasRoles;
 
-    protected $guard = 'admin';
+    protected $guard_name = 'admin';
 
     /**
      * The attributes that are mass assignable.
