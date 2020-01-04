@@ -38,17 +38,17 @@ Route::get('new','Admins\NewController@index');
 
 	  Route::get('users/trashed', 'Users\UsersController@trashed')->name('admin.users.trashed');
         Route::post('users/{id}/restore', 'Users\UsersController@restore')->name('admin.users.restore');
-        Route::post('users/{id}/force', 'Users\UsersController@force')->name('admin.users.force');	Route::resource('users','Admins\UserController', ['as' => 'admin']);
+        Route::post('users/{id}/force', 'Users\UsersController@force')->name('admin.users.force');	Route::resource('users','Users\UsersController', ['as' => 'admin']);
 
         /**
          * Users Routes
          */
-		
+		/*
         Route::get('users/trashed', 'Users\UsersController@trashed')->name('admin.users.trashed');
         Route::post('users/{id}/restore', 'Users\UsersController@restore')->name('admin.users.restore');
         Route::post('users/{id}/force', 'Users\UsersController@force')->name('admin.users.force');
-        Route::resource('users', 'Users\UsersController', ['as' => 'admin']);
-
+        
+*/
         Route::get('admins/trashed', 'Admins\AdminsController@trashed')->name('admin.admins.trashed');
         Route::post('admins/{id}/restore', 'Admins\AdminsController@restore')->name('admin.admins.restore');
         Route::post('admins/{id}/force', 'Admins\AdminsController@force')->name('admin.admins.force');
@@ -79,6 +79,9 @@ Route::get('new','Admins\NewController@index');
         Route::post('reservations/status/{id}', 'Products\ReservationsController@status', ['as' => 'admin'])->name('reservations.status');
         Route::resource('reservations', 'Products\ReservationsController', ['as' => 'admin']);
 		Route::post('reservations/active','Products\ReservationsController@activeStatus', ['as' => 'admin']);
+		
+		Route::post('/reservationsActive','Products\ReservationsController@reservationsActive', ['as' => 'admin'])->name('reservationsActive');	
+
 
     });
 

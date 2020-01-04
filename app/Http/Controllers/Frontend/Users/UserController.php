@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\Frontend\Users;
 use App\User;
 use App\Models\Products\Product;
+use App\Models\Products\Reservation;
 use Illuminate\Http\Request;
 use Hash;
 use Auth;
 use App\Http\Controllers\Controller;
 class UserController extends Controller
-{
-	
+{	
 	public function index()
 	{
 		if(Auth::user())
 		{
 			$user=User::find(Auth::user()->id);
-		       return view('frontend.users.index',compact('user'));
+			$products=Product::where('viewed' ,1)->get();
+			$reservations=Reservation::where('status' ,'success')->get();
+			//dd($reservations);
+		      return view('frontend.users.index',compact('user','products','reservations'));
 		}
 		else 
 			return redirect('/login');
@@ -43,15 +46,9 @@ class UserController extends Controller
 	}
 	public function editAddress(Request $request)
 	{
-		$request->validate([
-			'address'=>'required',
-			'phone'=>'required',
-			'city'=>'required'
-		]);
-		
 		$post=User::find($request->id);
 		$post->address=$request->address;
-		$post->phone=$request->phone;
+		$post->country=$request->country;
 		$post->city=$request->city;
 		$post->save();
 
@@ -73,35 +70,33 @@ class UserController extends Controller
 		{
 			
 		}
-
-  }
-	
-public function postDelete(Request $request)
-{
-	$user=User::find($request->id)->delete();
-	return response()->json();
-	
-	
 }
-		public function password()
+	public function order(Request $request)
 	{
-	  return view('profile.updatePassword');	
+		$orders=Reservation::where('user_id',$request->id)->get();
+	
+		return view('frontend.users.order',['orders'=>$orders]);
 	}
-	public function updatePassword(Request $request){
+	
+	public function details(Request $request)
+	{
+		$user=User::find($request->id);
 		
-		$oldPassword=$request->oldPassword;
-		
-		$newPassword=$request->newPassword;
-		
-			if(!Hash::check($oldPassword,Auth::user()->password))
-			{
-				return back()->with('error','your current password is not correct');
-			}
-		else
-		{
-			$request->user()->fill(['password'=>Hash::make($newPassword)])->save();
-			return back()->with('status','your  password is updated');
-		}
+		return view('frontend.users.details',['user'=>$user]);
 	}
+    public function saveDetails(Request $request)
+	{
+		$user=User::find($request->id);
+		$user->first_name=$request->first;
+		$user->last_name=$request->last;
+		$user->about=$request->about;
+		$user->gender=$request->gender;
+		$user->phone=$request->phone;
+		$user->save();
+		
+		return response()->json(['data'=>$request->all()]);
+	}
+	
+	
 	
 }

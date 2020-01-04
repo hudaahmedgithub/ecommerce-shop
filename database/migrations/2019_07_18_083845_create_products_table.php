@@ -18,12 +18,13 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('country_id');
             $table->unsignedInteger('currency_id');
-            $table->string('price')->default('0');
+            $table->integer('price')->default(1);
+			$table->string('before_price')->default('0');
             $table->string('color')->nullable();
             $table->integer('qty')->default(0);
 			$table->integer('stock')->default(1);
             $table->string('featured_image');
-            $table->integer('viewed')->default(0);
+            $table->boolean('viewed')->default(0);
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries');

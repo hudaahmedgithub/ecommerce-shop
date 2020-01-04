@@ -41,15 +41,9 @@
 
                                 <tr id="tr-{{ $admin->id }}">
                                     <td>{{ $i }}</td>
-                              @if(Auth::guard('admin')->user()->hasRole('super admin')) 
-									<td><img class="avatar" src="{{ url('assets/images/avatar-sm-1.jpg') }}" alt=""></td>
-									@endif
+                                    <td><img class="avatar" src="{{ url('assets/images/avatar-sm-1.jpg') }}" alt=""></td>
                                     <td>{{ $admin->name }}</td>
                                     <td>{{ $admin->email }}</td>
-									<td>{{$admin->permissions()->pluck('name')->implode(' ') }}</td>
-									<td>{{$admin->roles()->pluck('name')->implode(' ') }}</td>
-									
-								@can('deleter')
                                     <td>
                                         <form method="POST" action="{{ route('admin.admins.destroy', ['id' => $admin->id]) }}">
                                             @csrf
@@ -57,7 +51,6 @@
                                             <button data-id="{{ $admin->id }}" id="btnDelete" class="btn btn-xs btn-danger p-0"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </td>
-									@endcan
                                 </tr>
 
                                 @php $i++; @endphp

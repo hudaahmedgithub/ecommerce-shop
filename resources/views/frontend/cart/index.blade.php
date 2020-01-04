@@ -79,7 +79,7 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
                             <tbody>
                             <tr>
                                 <td class="cart_product">
-                                    <p><img src="{{url('frontend/images',$cartItem->options->img)}}" class="img-responsive" width="250"></p>
+                                    <p><img src="{{url('frontend/images',$cartItem->image)}}" class="img-responsive" width="250"></p>
                                 </td>
                                 <td class="cart_description">
                                 <!--<a href="{{url('/product_detail')}}/{{$cartItem->id}}">heang</a>
@@ -87,7 +87,7 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
                                     <!--</div>-->
                                     <h4><a href="{{url('/product-details')}}/{{$cartItem->id}}" style="color:blue">{{$cartItem->name}}</a></h4>
                                     <p>Product ID: {{$cartItem->id}}</p>
-                                    <p>Only {{$cartItem->options->stock}} left</p>
+                                    <p>Only {{$cartItem->stock}} left</p>
                                 </td>
                                 <td class="cart_price">
                                     <p>${{$cartItem->price}}</p>

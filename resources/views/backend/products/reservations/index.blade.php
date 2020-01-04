@@ -14,12 +14,6 @@
     .modal-backdrop{
         z-index: 1;
     }
-	.badge
-	{
-		background: #07b;
-		color: #fff;
-	}
-	
     .modal-dialog{
         -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
         -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -74,15 +68,8 @@
 
                                 @foreach($reservations as $property)
                                 <tr id="tr-{{ $property->id }}">
-									
-									<input type="number" value="{{$property->active}}" id="activeStatus">
-									<input type="hidden" value="{{$property->id}}" id="activeId">
                                     <td>{{ $i }}</td>
-                                    <td>{{ $property->user['name'] }}</td>
-									<td id="dataActive" style="color:#903;display:none;">
-									</td>
-								<button id="accept" class="btn btn-link ">status</button >
-								
+                                    <td>{{ $property->user->name }}</td>
                                     <td>
                                         @if ($property->status == 'pending')
                                             <h5 class='badge bg-danger'>pending</h5>
@@ -132,19 +119,19 @@
                                                                     <table class="table">
                                                                         <tr>
                                                                             <td>Name :</td>
-                                                                            <td>{{ $property->user['name'] }}</td>
+                                                                            <td>{{ $property->user->name }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Email :</td>
-                                                                            <td>{{ $property->user['email'] }}</td>
+                                                                            <td>{{ $property->user->email }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Address :</td>
-                                                                            <td>{{ $property->user['country'] .' - '. $property->user['city']  .' - '. $property->user['address'] }}</td>
+                                                                            <td>{{ $property->user->country .' - '. $property->user->city  .' - '. $property->user->address }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Phone :</td>
-                                                                            <td>{{ $property->user['phone'] }}</td>
+                                                                            <td>{{ $property->user->phone }}</td>
                                                                         </tr>
                                                                     </table>
                                                                 </div>
@@ -342,19 +329,7 @@
 @endsection
 
 @push('script')
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-$(document).ready(function(){
-
- $(document).on('click', '#accept', function() {
-	 accept=$('#activeStatus').val();
-	 id=$('#activeId').val();
-	var  oldValue=1;
-	 $.post('/reservations/active',{id:id,oldValue:oldValue},function(){
-		  
-		 ('#dataActive').show();
-	 });
- });
 
     $(document).on('click', '#btnEdit', function() {
         let form    = $('#formPlace');
@@ -489,21 +464,6 @@ $(document).ready(function(){
             }
         });
     });
-$('#active').on('click',(function(e) {
-    e.preventDefault();
-	
-    var item=$('#item').val();
-	var id=$('#stat').val();
-    let action="{{ url('/') }}/admin/reservations/active/"+id;
-var data = {
-		isActive: 1,
-		}
-		axios.post(action,data).then(reponse=>{
-		e.currentTarget.className="btn btn-link like"
-		console.log(reponse['data']);
-			})
-	
-}))
 
     $(document).on('click', '#btnDelete', function() {
         let form    = $('#formProperty');
@@ -544,7 +504,5 @@ var data = {
             }
         })
     });
-});
-	
 </script>
 @endpush

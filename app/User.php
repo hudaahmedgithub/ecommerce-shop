@@ -19,7 +19,7 @@ class User extends UsersFilter
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'image', 'phone', 
+        'first_name','last_name', 'email', 'password', 'image', 'phone', 
         'address', 'gender', 'about', 'age', 'city', 'country',
     ];
 

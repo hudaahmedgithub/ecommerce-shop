@@ -22,7 +22,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role','access_products','access_categories','access_orders','access_users',
     ];
 
     /**
@@ -49,7 +49,6 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
 
     # Create Admin User
     public static function boot()

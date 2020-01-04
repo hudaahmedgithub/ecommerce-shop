@@ -59,5 +59,6 @@ class Review extends Model
     {
         return $this->hasMany(Review::class, 'parent');
     }
+	
 
 }

@@ -6,15 +6,17 @@
                 <!--all product details section-->
                 <div class="content col-lg-9">
                     <!--product card with images and few info-->
-                    <div class="product-card row">
+                    <div class="product-card row" >
                         <!--product image part-->
                         <div class="pro-img col-4">
                             <img class="main-img" src="{{url('frontend/images',$product->featured_image)}}" alt="product-image">
-                            <div class="image-gallery">
-                                <img src="images/1.jpg" alt="#">
-                                <img src="images/1.jpg" alt="#">
-                                <img src="images/pro1.jpg" alt="#">
+							
+                            <div id="">
+								@foreach($images as $img)
+								<a href="#" id=""> <img src="{{url('frontend/images',$img->path)}}" alt="#" width="50px" height="70px" ></a>
+                              @endforeach  
                             </div>
+							
                             <h5>share this product</h5>
                             <div class="social">
                                 <i class="fa fa-facebook"></i>
@@ -23,20 +25,24 @@
                         </div>
                         <!--product few details part-->
                         <div class="few-details col-8">
-                            <h4>{{$product->description}}<i class="fa fa-heart-o"></i></h4>
-                            
-                            <p>Brand: <a href="#">{{$product->category['name']}}</a> | <a href="#">similar products of this brand</a></p>
+                            <h4>{{$product->name}}</h4>
+                             <h5>{{$product->description}}</h5>
+                            <p>Brand: <a  data-id={{$product->category_id}}>{{$product->category['name']}}</a> | <a href="#">similar products of this brand</a></p>
                             <div class="rating-star">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star-o"></span>
-                                <a href="#">(5 ratings)</a>
-                            </div><hr>
-                            <p class="price">EGP {{$product->price}}</p>
-                            <span class="price-before">EGP {{$product->old_price}}</span><span class="discount">{{$product->prencent}}</span>
-                            <a href="{{url('cart/addItem',$product->id)}}"><button class="btn btn-block"><i class="fa fa-cart-plus" aria-hidden="true"></i>add to cart</button></a>
+						@foreach($rate as $rating)
+						  @for($i=0;$i<$rating->rate;$i++)
+								<span class="fa fa-star checked"></span>
+                                <a href="#"></a>
+							@endfor
+								({{($rating->rate)}} ratings)
+                          @endforeach
+                            </div>
+								<hr>
+                            <p class="price" >EGP {{$product->price}}</p>
+                            <span class="price-before">EGP {{$product->before_price}}</span><span class="discount">{{$product->prencent}}</span>
+							<input type="hidden" value="{{$product->name}}" id="name" name="name">
+							<input type="hidden" value="{{$product->price}}" id="price" name="price">
+                            <a href="{{url('cart/addItem',$product->id)}}"><button class="btn btn-block" id="addCart" data-id="{{$product->id}}"><i class="fa fa-cart-plus" aria-hidden="true" ></i>add to cart</button></a>
                         </div>
                     </div>
                     <!--product-details section-->
@@ -131,53 +137,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--Most popular products-->
-                    <div class="most-popular">
-                        <h4>most popular</h4><hr>
-                        <div class="most-popular-products row">
-                            <div class="col-lg-2 col-md-4 col-sm-6">
-                                <div class="card">
-                                    <img src="{{url('frontend/images',$product->image)}}">
-                                    <div class="info">
-                                        <h6>description of this product</h6>
-                                        <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                        <span class="discount-percentage">-20%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-4 col-sm-6">
-                                <div class="card">
-                                    <img src="images/pro1.jpg">
-                                    <div class="info">
-                                        <h6>description of this product</h6>
-                                        <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                        <span class="discount-percentage">-20%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-4 col-sm-6">
-                                <div class="card">
-                                    <img src="images/pro1.jpg">
-                                    <div class="info">
-                                        <h6>description of this product</h6>
-                                        <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                        <span class="discount-percentage">-20%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-4 col-sm-6">
-                                <div class="card">
-                                    <img src="images/pro1.jpg">
-                                    <div class="info">
-                                        <h6>description of this product</h6>
-                                        <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                        <span class="discount-percentage">-20%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--feedback section-->
+              
                     <div class="feedback">
                         <h4>customer feedback<span>see all<i class="fa fa-angle-right"></i></span></h4><hr>
                         <div class="row">
@@ -192,11 +152,13 @@
                                     <span class="fa fa-star-o"></span>
                                     <p>286 ratings</p>
                                 </div>
+				@foreach($rate as $rating)
                                 <div class="rating-count">
-                                    <p>5
-                                        <span class="fa fa-star checked"></span>200
+                                    <p>{{$rating->rate}}
+                                        <span class="fa fa-star checked"></span>
+										
                                         <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </p>
                                     <p>4
@@ -224,6 +186,7 @@
                                         </div>
                                     </p>
                                 </div>
+				@endforeach
                             </div>
                             <div class="col-lg-9">
                                 
@@ -265,194 +228,94 @@
             </div>
         </div>
         <!--Most popular products-->
-        <div class="container">
-            <div class="most-popular">
-                <h4>more items from this seller</h4><hr>
-                <div class="most-popular-products row">
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
+       
+			 <!-----------------Top selling items---------------------->
+        <div class="top-selling">
+            <div class="container">
+                <div class="top-items">
+                    <h4>top selling</h4><hr>
+                    <div class="most-popular-products row">
+					
+                 @foreach($reservations  as $product)
+							
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+						@foreach($product->products as $proRes)
+                            <div class="card">
+                                <img src="{{url('frontend/images',$proRes->featured_image)}}">
+                                <div class="info">
+                                    <h6>{{$proRes->description}}</h6>
+                                    <p>EGP {{$proRes->price}}</p><p class="before"></p>
+                                    <span class="discount-percentage">-20%</span>
+                                </div>
                             </div>
+					@endforeach
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
+						
+                        	@endforeach
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Most popular products-->
-        <div class="container">
-            <div class="most-popular">
-                <h4>recently viewed</h4><hr>
-                <div class="most-popular-products row">
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="images/pro1.jpg">
-                            <div class="info">
-                                <h6>description of this product</h6>
-                                <p>EGP 1000</p><p class="before">EGP 1350</p>
-                                <span class="discount-percentage">-20%</span>
-                            </div>
-                        </div>
+                     
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Start Pre Footer -->
-      <section class="pre-footer">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <h4> Quick Links</h4>
-                  <ul class="ula">
-                    <li><a href="">about us <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Faq <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Help <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">My account <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Create account <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Contacts<i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-    
-                  </ul>
+        <!----------------------Recently viewed-------------------->
+        
+      
+
+        <!--Most popular products-->
+        <div class="container">
+            <div class="most-popular">
+                <h4>recently viewed</h4><hr>
+                <div class="most-popular-products row">
+                   
+                       	@foreach($products as $product)	
+						
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+						
+                            <div class="card">
+                                <img src="{{url('frontend/images',$product->featured_image)}}" width="150px" height="150px">
+                                <div class="info">
+                                    <h6>{{$product->description}}</h6>
+                                    <p >EGP {{$product->price}}</p><p class="before">EGP {{$product->before_price}}</p>
+                                    <span class="discount-percentage">-20%</span>
+                                </div>
+                            </div>
+						
+                        </div>
+							
+                        	@endforeach
+                        </div>
+                    </div>
+                    
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <h4> Categories</h4>
-                    <ul class="ula">
-                      <li><a href="">Shops <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Hotels <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Restaurant <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Bars <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Events <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Fitness <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-    
-                    </ul>
-                  </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6">
-                      <h4> Contacts</h4>
-                      <ul class="ula">
-                        <li><a href=""><i class="fas fa-home" aria-hidden="true"></i>97845 Baker st. 567
-                          Los Angeles - US </a> </li>
-                        <li><a href=""><i class="fas fa-headphones-alt" aria-hidden="true"></i>01015683986 </a> </li>
-                        <li><a href=""> <i class="far fa-envelope" aria-hidden="true"></i>medhatashour19@gmail.com</a> </li>
-                      </ul>
-                    </div>
-    
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                      <h4> Keep in touch</h4>
-                      <ul class="ula">
-                        <li>
-                          <input type="email" placeholder="your email"><button class=" cclr">submit</button>
-                        </li>
-                        <li class="spli follow">
-                          <h5>Follow Us</h5>
-                          <ul>
-                            <li class="spli"><i class="scl fab fa-facebook-f" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-twitter" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-google-plus-g" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-pinterest-p" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-instagram" aria-hidden="true"></i></li>
-    
-                          </ul>
-                        </li>
-    
-                      </ul>
-                    </div>
-    
-              </div>
-            </div>
-          </section>
-          <!-- End Pre footer -->
-    
+          
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+/*$(document).on('click','#addCart',function(e){
+			e.preventDefault();
+			 name=$('#name').val();
+		     price=$('#price').val();
+	         id=$(this).data('id');
+		    console.log(id,name,price);
+		
+	     $.get('/cart/addItem',{id:id},function(data){
+			 console.log(data.data);
+		 })
+    })*/
+});
+</script>
+
+
  @endsection

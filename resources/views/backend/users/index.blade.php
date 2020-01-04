@@ -44,18 +44,13 @@
                                     <td><img class="avatar" src="{{ url('assets/images/avatar-sm-1.jpg') }}" alt=""></td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-									 
-									@if (auth()->user()->hasPermission('delete_users'))
-									<td>
+                                    <td>
                                         <form method="POST" action="{{ route('admin.users.destroy', ['id' => $user->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button data-id="{{ $user->id }}" id="btnDelete" class="btn btn-xs btn-danger p-0"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </td>
-							
-                                    
-									@endif
                                 </tr>
 
                                 @php $i++; @endphp

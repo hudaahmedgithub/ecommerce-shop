@@ -46,7 +46,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <div class="clearfix">
-                                 <form class="pull-right" method="POST" action="{{ route('admin.users.force', ['id' => $user->id]) }}">
+                                            <form class="pull-right" method="POST" action="{{ route('admin.users.force', ['id' => $user->id]) }}">
                                                 @csrf
                                                 <button class="btn btn-xs btn-danger p-0"><i class="mdi mdi-delete"></i></button>
                                             </form>

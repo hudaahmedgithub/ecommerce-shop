@@ -1,6 +1,11 @@
 @extends('frontend.layouts.main')
 @section('content')
 <link rel="stylesheet" href="css/shopping-cart.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
  <script>
         $(document).ready(function(){
             <?php for($i=1;$i<20;$i++){?>
@@ -16,13 +21,22 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
                         url: '<?php echo url('/cart/update');?>/'+proId,
                         data: "qty=" + newqty + "& rowId=" + rowId + "& proId=" + proId,
                         success: function (response) {
-                            console.log(response);
+                            console.log('true');
                             $('#updateDiv').html(response);
                         }
                     });
                 }
             });
             <?php } ?>
+	$(document).on('click','#delete',function(){
+	id=$(this).data('id');
+		console.log(id);
+	$.post('cart/remove',{id:id},function(){
+		alert('do you want to delete');
+		$('#data').html('');
+	  
+	})
+})
         });
     </script>
     <?php if ($cartItems->isEmpty()) { ?>
@@ -55,122 +69,93 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
         <div class="shopping-cart">
             <div class="container">
                 <div class="row">
-					  <?php $count =1;?>
-					@foreach($cartItems as $cart)
+					<?php $count =1;
+					?> 
+					@foreach($cartItems as $key=>$cart)
+					 
                     <div class="col-md-8">
-                        <h4>shopping cart ( {{$cart->id}} )</h4>
+                        <h4>shopping cart (<?php echo $count;?>)</h4>
                         <div class="cart"style="background:#fff">
-                            <img src="{{url('frontend/images',$cart->featured_image)}}" alt="cart image" width="100px" height="100px">
+							<p style="float:right;background:#0bf;color:#fff;font-size:13px" class="badge">total:<?php $row=Cart::get($cart->id);
+							echo $row->quantity*$cart->price;?> </p>
+                            <img src="{{url('frontend/images',$cart->attributes->featured_image)}}" alt="cart image" width="100px" height="100px">
                             <div class="info"style="float:right;margin-right:270px">
                                 <h5>{{$cart->name}}</h5>
 								
                                <div class="select-quantity">
-								   <span class="price"> EGP</span>
-								   
-                                    <form action="{{url('cart/update',$cart->id)}}" method="post" role="form"style="float:right;margin-left:130px">
+								   <span class="price"> EGP <?php echo $cart->price?></span>
+								   <p></p>
+                                    <form action="{{url('/cart/update')}}/{{$cart->id}}" method="post" role="form"style="float:right;margin-left:130px;margin-top:-50px">
 
-                                        <input type="hidden" name="_method" value="PUT">
-                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <input type="hidden" name="proId" value="{{$cart->id}}"/>
-                                        <input type="number" size="2" value="{{$cart->qty}}" name="qty" id="upCart<?php echo $count;?>"
-                                       autocomplete="off" style="text-align:center; max-width:50px; "  MIN="1" MAX="1000">
+                                  <input type="hidden" name="_method" value="PUT">
+                                   <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                   <input type="hidden" name="proId" value="{{$cart->id}}"/>
+                                   <input type="number" size="2" value="{{$cart->quantity}}" name="qty" 
+                                    autocomplete="off" style="text-align:center; max-width:50px; "  MIN="1" MAX="1000">
                                         <input type="submit" class="btn btn-primary" value="Update" styel="margin:5px">
                                     </form>
 <!--</div>-->
 								</div>
-                                <p class="store-name">sold by: <span>shopping center name</span></p>
-                                <p class="order-now"style="float:right;color:red">order now, only {{$cart->stock}} left on stock!</p>
+								
+                                <p class="order-now"style="float:right;color:red">order now, only {{$cart->attributes->stock}} left on stock!</p>
                                 <div class="clear"></div>
-                                <p>condition: <span>new</span></p>
-                                <p>color: <span>blue</span></p>
+								
+                                <p>color: {{$cart->attributes->color}}</p>
+							
                             </div>
-                            <hr>
-                            <a href="#" class="save">save for later</a>
-                            <a href="{{url('/cart/remove')}}/{{$cart->id}}" class="delete">delete</a>
+                           <a href="javascript:void(0)" class="_deleteCart" data-id="{{$cart['id']}}"> <i class="fa fa-trash"></i>delete </a>
                         </div>
-                    </div>
-					 @endforeach 
-     
+		</div>
+								
+				<?php $count++;?>
+                    
+       	@endforeach 
+			    <?php } ?>
                     <div class="col-md-4 right-side">
                         <div class="total-cost">
-                            <p>total: </p>
-                            <span class="price">{{Cart::getTotal()}} EGP</span>
+						<p>Total Price: {{Cart::getTotal()}}</p>
+                          
+                            <span class="price"></span>
                         </div>
+						
                         <a href="{{url('check-out')}}"><button class="btn btn-block bg-success">proceed to checkout</button></a>
                         <button class="btn btn-block coupon">add coupon</button>
-						
-				<?php $count++;?>
-                        <?php } ?>
+			
                     </div>
+			
                 </div>
             </div>
         </div>
-<br>
-<br>
-<br>
-<br>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
 
-        <!-- Start Pre Footer -->
-      <section class="pre-footer">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <h4> Quick Links</h4>
-                  <ul class="ula">
-                    <li><a href="">about us <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Faq <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Help <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">My account <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Create account <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                    <li><a href="">Contacts<i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-    
-                  </ul>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <h4> Categories</h4>
-                    <ul class="ula">
-                      <li><a href="">Shops <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Hotels <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Restaurant <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Bars <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Events <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-                      <li><a href="">Fitness <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></a> </li>
-    
-                    </ul>
-                  </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6">
-                      <h4> Contacts</h4>
-                      <ul class="ula">
-                        <li><a href=""><i class="fas fa-home" aria-hidden="true"></i>97845 Baker st. 567
-                          Los Angeles - US </a> </li>
-                        <li><a href=""><i class="fas fa-headphones-alt" aria-hidden="true"></i>01015683986 </a> </li>
-                        <li><a href=""> <i class="far fa-envelope" aria-hidden="true"></i>medhatashour19@gmail.com</a> </li>
-                      </ul>
-                    </div>
-    
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                      <h4> Keep in touch</h4>
-                      <ul class="ula">
-                        <li>
-                          <input type="email" placeholder="your email"><button class=" cclr">submit</button>
-                        </li>
-                        <li class="spli follow">
-                          <h5>Follow Us</h5>
-                          <ul>
-                            <li class="spli"><i class="scl fab fa-facebook-f" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-twitter" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-google-plus-g" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-pinterest-p" aria-hidden="true"></i></li>
-                            <li class="spli"><i class="scl fab fa-instagram" aria-hidden="true"></i></li>
-    
-                          </ul>
-                        </li>
-    
-                      </ul>
-                    </div>
-    
-              </div>
-            </div>
-          </section>
-          <!-- End Pre footer -->
-    @endsection
+	$(document).ready(function(){
+		$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$(document).on('click','#addReview',function(e){
+			e.preventDefault();
+			var name=$('#name').val();
+		    var price=$('#price').val();
+		    var rate=$('#rate').val();
+			var comment=$('#comment').val();
+			var product_id=$('#product_id').val();
+		
+	     $.post('/store-review',{email:email,password:password,rate:rate,comment:comment,product_id:product_id},function(data){
+			 $('#email').val('');
+             $('#password').val('');
+             $('#rate').val('0');
+             $('#comment').val('');
+             $('#product_id').val('');
+			 
+		 })
+    })
+});
+</script>
+@endsection

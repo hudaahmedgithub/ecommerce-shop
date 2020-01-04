@@ -17,5 +17,8 @@ return [
     'password'          => 'كلمة السر',
     'remember'          => 'تذكرنى',
     'forget_password'   => 'نسيت كلمة السر؟',
-
+    'logout'            => 'تسجيل الخروج',
+    'create_account'    => ' انشاء حساب جديد',
+	'orders'            => 'الطلبيات ',
+    'account'           => 'حسابى ',
 ];

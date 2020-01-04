@@ -16,38 +16,38 @@
                         <!-- top pagination -->
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                                {{ $products->links() }}
                             </ul>
                         </nav>
 
                         <!--top price progress-->
                         <div class="po-count">
-                            <p>EGP <span>0</span></p>
+                            <p>EGP <span>{{$min}}</span></p>
                             <input type="range" class="custom-range" min="0" max="1000" step="1" id="customRange2">
-                            <p>EGP <span>1000</span></p>
+                            <p>EGP <span>{{$max}}</span></p>
                         </div>
-
+						<button type="button" class="btn btn-info" id="btnFind" style="margin-left:-30px;">Search </button>
                         <!--select category -->
                         <div class="select-category">
-                            <select class="custom-select">
-                                <option selected>most popular</option>
+                            <select id="selectProduct">
+                                
                                 <option value="1">new in</option>
                                 <option value="2">lowest price</option>
                                 <option value="3">heighest price</option>
-                                <option value="3">best rating</option>
+                                <option value="4">best rating</option>
                             </select>
                         </div>
+						
                     </div>
                     <!--End of Select category section-->
 
                     <!--Start of Products card section-->
-					
-                    <div class="pro-cards row">
+					<div id="searchProduct">
+					<div id="showProduct">
+					<div id="showLow">
+                    <div class="pro-cards row showLow" id="showProducts">
 						@foreach($products as $product)
+							
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="card">
                                 <img src="{{url('frontend/images',$product->featured_image)}}">
@@ -55,29 +55,29 @@
                                 <hr>
                                 <div class="info">
                                     <h6>{{$product->description}}</h6>
-                                    <p class="price">EGP   {{$product->price}}</p><p class="before">EGP {{$product->old_price}}   </p>
+                                    <p class="price">EGP   {{$product->price}}</p><p class="before">EGP {{$product->before_price}}   </p>
                                     <span class="discount-percentage">-20%</span>
                                 </div>
                                 <a href="{{url('product-details',$product->id)}}"><button type="button" class="btn bg-primary">buy now</button></a>
                             </div>
                         </div>
+						
                      @endforeach
                         <hr>
+						</div>	
 						
-
                         <!--bottom pagination-->
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                               {{ $products->links() }}
+                               
                             </ul>
                         </nav>
                     </div>
                     <!--End of Products card section-->
                 </div>
+				</div>
+				</div>
                 <!-- End of content section-->
 
                 <!--Start of aside section-->
@@ -87,26 +87,34 @@
                     <div class="home-office">
                         <h4>home & office</h4>
                         <ul>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>home & kitchen</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>tools & home improvment</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>office products</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>home & furniture</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>arts, crafts & sewing</a></li>
+							@foreach($categories as $cat)
+                            <li><a  id="one" class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"  data-id={{$cat->id}} >{{$cat->name}}</a>
+								
+							<div  id="getData">
+                       </div>
+							</li>
+							
+							@endforeach
+                            
                         </ul>
                         <hr>
                     </div>
 
                     <!--Brands selector -->
-                    <div class="brand">
-                        <form class="form-inline">
-                            <input class="form-control" type="search" placeholder="Search brand" aria-label="Search">
-                            <i class="fa fa-search"></i>
+                    <div class="brand" >
+                        <form class="form-inline" id="searchCategory" >
+						
+                            <input class="col-md-8 form-control" type="search" placeholder="Search brand" aria-label="Search" name="search" id="searchCat">
+							<button type="submit" class="col-md-4 btn btn-info"> search</button>
+                           
                         </form>
-                        <ul>
-							@foreach($categories as $cat)
-                            <li><a href="{{url('category',$cat->id)}}"><input type="checkbox">{{$cat->name}}</a></li>
-							
-                           @endforeach
+                        <ul >
+							<li><input type="checkbox" id="allProducts">كل المنتجات</li>
+							<div id="cat">
+							@foreach($products as $pro)
+                            <li><input type="checkbox" id="categoryList" data-id="{{$pro->id}}">{{$pro->name}}</li>
+							@endforeach
+							</div>	
                         </ul>
                     </div>
   
@@ -150,6 +158,77 @@
                 <!--End of aside section-->
             </div>
         </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+		<!-- Latest compiled and minified CSS -->
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+ });
+	$(document).on('click','#btnFind',function(){
+		value=$('#selectProduct').val();
+		
+	$.post('/low',{value:value},function(response){
+	console.log(response);
+	$('.showLow').html(response);
+
+});	
+});
+		
+$(document).on('click','#categoryList',function(){
+	id=$(this).data('id');
+$.get('/category',{id:id},function(response){
+	
+	$('#showProduct').html(response);
+
+});
+});
+$(document).on('click','#allProducts',function(){
+
+$.get('/allProducts',function(response){	$('#showProducts').html(response);
+ });
+});
+$('#searchCategory').submit(function(e){
+	e.preventDefault();
+search=$('#searchCat').val();
+$.post('/getCategory',{search:search},function(data){
+		console.log(data.data);
+		$('#cat').html('');
+		   $('#cat').append("<li>"
+							 +"<input type='checkbox' id='categoryList' data-id="+data.data.id+">"
+							 +data.data.name+"</li>");
+	});
+});
+$(document).on('click','#one',function(){
+	id=$(this).data('id');
+	console.log(id);
+	$.get('/getSide',{id:id},function(response)
+		 {
+		console.log(response);
+		
+		$('#getData').html(response);
+	});
+});
+			
+$('#searchAll').submit(function(e){
+	e.preventDefault();
+search=$('#search').val();
+	
+$.post('/getSearch',{search:search},function(response){
+	console.log(response);
+	
+	$('#searchProduct').html(response);
+	});
+});
+	});
+</script>
         <!-- Start Pre Footer -->
 @endsection

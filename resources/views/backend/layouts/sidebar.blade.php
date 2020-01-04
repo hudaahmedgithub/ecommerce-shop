@@ -118,13 +118,13 @@
                         <i class="fa fa-angle-down pull-left" style="margin: 5px auto;"></i>
                     </a>
                     <ul class="sub-menu js__content">
-                        
+                        <li><a href="{{ route('admin.users.index') }}">{{ __('sidebar.all_users') }}</a></li>
                         <li><a href="{{ route('admin.users.trashed') }}">{{ __('sidebar.trashed_users') }}</a></li>
                     </ul>
                     <!-- /.sub-menu js__content -->
                 </li>
                 <li class="{{ set_active('admins', 'current') }}">
-                    <a class="waves-effect parent-item js__control" href=""><i class="menu-icon mdi mdi-account-multiple"></i>
+                    <a class="waves-effect parent-item js__control" href="{{ route('admin.users.index') }}"><i class="menu-icon mdi mdi-account-multiple"></i>
                         <span>{{ __('sidebar.admins_manage') }}</span>
                         <i class="fa fa-angle-down pull-left" style="margin: 5px auto;"></i>
                     </a>

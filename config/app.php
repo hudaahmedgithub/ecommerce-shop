@@ -168,7 +168,7 @@ return [
          * Package Service Providers...
          */
         App\Providers\RepositoryServiceProvider::class,
-        Darryldecode\Cart\CartServiceProvider::class,
+       Darryldecode\Cart\CartServiceProvider::class,
         Damas\Paytabs\PaytabsServiceProvider::class,
 		Laratrust\LaratrustServiceProvider::class,
 		

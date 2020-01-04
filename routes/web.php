@@ -11,21 +11,32 @@ Route::group(['middleware' => 'cart'], function () {
     # The Landing Page Routes
     // Route::get('/', 'Landing\LandingController@index')->name('home');
 	
-    Route::get('/', function() {
-        return "Hello world";
-    });
-	
-	/**
+ /**
  * ----------------------------------------
  * |                                      |
  * |        Frontend Routes                |
  * |                                      |
  * ----------------------------------------
  */
+Route::get('/', 'HomeController@index');
 
+Route::post('/store-review','HomeController@store')->name('store-review');
+
+Route::get('/readReview','HomeController@readReview')->name('readReview');
+	
+Route::get('/allProducts','Products\ProductController@allProducts')->name('allProducts');
+	
+Route::post('/getCategory','Products\ProductController@getCategory')->name('getCategory');
+	
+Route::post('/getSearch','Products\ProductController@getSearch')->name('getSearch');
+	
 Route::resource('/products', 'Products\ProductController');
-
-Route::get('/product-details/{id}', 'Products\ProductController@productDetails');
+	
+Route::post('/low','Products\ProductController@low');
+	
+Route::get('/getSide','Products\ProductController@getSide');	
+	
+Route::get('/product-details/{id}', 'Products\ProductController@productDetails')->name('product-details');
 
 Route::get('/shopping-cart', 'Products\CartController@index');
 	
@@ -39,7 +50,10 @@ Route::get('/check-out', 'Products\CheckoutController@index');
 
 Route::post('/formvalidate','Products\CheckoutController@address');
 
-Route::get('/category/{id}','Products\ProductController@category');
+Route::get('/category','Products\ProductController@category');
+	
+	/////////contact /////////
+Route::match(['GET','POST'],'/pages/contact','Landing\ContactsController@contact');
 	////////user home///////////
 	
 //Route::get('/user/{id}','Users\UserController@index');
@@ -48,7 +62,13 @@ Route::post('/updatePassword', 'Users\UserController@updatePassword');
 	
 Route::get('/profile','Users\UserController@index')->name('profile');
 
-Route::get('/read','Users\UserController@read');	
+Route::get('/read','Users\UserController@read');
+	
+Route::get('/order','Users\UserController@order');	
+
+Route::get('/details','Users\UserController@details')->name('details');	
+
+Route::post('/saveDetails','Users\UserController@saveDetails')->name('saveDetails');	
 
 Route::post('/post','Users\UserController@post')->name('post');
 	

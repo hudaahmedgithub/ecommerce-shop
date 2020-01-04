@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend\Landing;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\DB;
 use App\Models\Products\Slider;
-
+use Illuminate\Http\Request;
 class LandingController extends FrontendController
 {
     /**
@@ -118,4 +118,12 @@ class LandingController extends FrontendController
                     )
                     ->get();
     }
+	public function contact()
+	{
+		return view ('frontend.landing.contact');
+	}
+	public function send(Request $request)
+	{
+		return response()->json();
+	}
 }
