@@ -48,7 +48,6 @@ class ProductController extends Controller
         ->join('product_translations', 'products.id', '=', 'product_translations.product_id')
         ->where('name','like','%'. $request->search .'%')
         ->firstOrFail();
-		
 		return response()->json(['data'=>$data]);
 	}
 	}
@@ -100,6 +99,12 @@ class ProductController extends Controller
 		$data=Product::where('category_id',$request->id)->get();
 		
 		return view('frontend.products.side',['data'=>$data]);
+	}
+		public function rangePrice(Request $request)
+	{
+	
+		$products=Product::where('price', '<=',$request->price)->orderBy('price','asc')->get();
+		return view('frontend.products.range',['products'=>$products]);
 	}
     public function create()
     {

@@ -23,13 +23,14 @@
                         <!--top price progress-->
                         <div class="po-count">
                             <p>EGP <span>{{$min}}</span></p>
-                            <input type="range" class="custom-range" min="0" max="1000" step="1" id="customRange2">
+                            <input type="range" class="custom-range" min="{{$min}}" max="{{$max}}" step="1" id="customRange">
                             <p>EGP <span>{{$max}}</span></p>
+							<span id="priceNum"></span>
                         </div>
-						<button type="button" class="btn btn-info" id="btnFind" style="margin-left:-30px;">Search </button>
+						
                         <!--select category -->
                         <div class="select-category">
-                            <select id="selectProduct">
+                            <select id="btnFind" name="btnFind">
                                 
                                 <option value="1">new in</option>
                                 <option value="2">lowest price</option>
@@ -45,7 +46,7 @@
 					<div id="searchProduct">
 					<div id="showProduct">
 					<div id="showLow">
-                    <div class="pro-cards row showLow" id="showProducts">
+                    <div class="pro-cards row showLow showRange" id="showProducts">
 						@foreach($products as $product)
 							
                         <div class="col-lg-3 col-md-4 col-sm-6">
@@ -121,10 +122,12 @@
                     <!--Range of prices-->
                     <div class="progress-price">
                         <h4>price</h4>
-                        <input type="range" class="custom-range" min="0" max="1000" step="1" id="customRange2">
-                        <p>EGP <span>0</span></p><p>EGP <span>1000</span></p>
-                        
+                        <input type="range" class="custom-range" min="{{$min}}" max="{{$max}}" step="1" id="customRange2">
+                        <p>EGP <span>{{$min}}</span></p><p>EGP <span>{{$max}}</span></p>
+						<br>
+                       
                     </div>
+					<span id="priceNum2"></span> 
                     <hr>
 
                     <!-- Seller score progress-bar -->
@@ -173,15 +176,33 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
  });
-	$(document).on('click','#btnFind',function(){
-		value=$('#selectProduct').val();
-		
+	$('#btnFind').change(function(){
+		value=$('#btnFind').val();
+	
 	$.post('/low',{value:value},function(response){
 	console.log(response);
 	$('.showLow').html(response);
 
 });	
 });
+$('#customRange2').change(function(){
+	price=$('#customRange2').val();
+	console.log(price);
+	$('#priceNum2').html(price);
+	$.post('/rangePrice',{price:price},function(response){
+		$('.showRange').html(response);
+	});
+	
+ });
+$('#customRange').change(function(){
+	price=$('#customRange').val();
+	$('#priceNum').html(price);
+	console.log(price);
+	$.post('/rangePrice',{price:price},function(response){
+		$('.showRange').html(response);
+	});
+	
+ });	
 		
 $(document).on('click','#categoryList',function(){
 	id=$(this).data('id');

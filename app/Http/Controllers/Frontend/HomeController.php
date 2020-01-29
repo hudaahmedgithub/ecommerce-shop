@@ -23,8 +23,11 @@ class HomeController extends FrontendController
 		$sliders=Slider::get();
 		$comments=Review::all();
 		$products=Product::all();
+		$categories=Category::all();
+		$max=Product::max('price');
+		$min=Product::min('price');
 		$productsOnly=Product::take(5)->orderBy('id','desc')->get();
-        return view('frontend.home.home',compact('sliders','comments','products','productsOnly'));
+        return view('frontend.home.home',compact('sliders','comments','products','productsOnly','categories','min','max'));
     }
 public function store(Request $request)
 	{
@@ -54,4 +57,24 @@ public function store(Request $request)
 		$review=Review::all();
 		return response()->json(['data'=>$review]);
 	}
+	public function HomeSearch(Request $request)
+	{
+		
+		$categories = Category::all();
+		$max=Product::max('price');
+		$min=Product::min('price');
+        $products=Product::select('products.id','products.price','products.featured_image','products.before_price','product_translations.description','product_translations.name')
+        ->join('product_translations', 'products.id', '=', 'product_translations.product_id')
+        ->where('name','like','%'. $request->search .'%')
+		->where('category_id',$request->brand)
+		->where('price', '<=',$request->price)
+        ->paginate(12);
+		return view('frontend.products.index',compact('products','max','min','categories'));
+	}
 }
+
+
+
+
+
+

@@ -20,6 +20,8 @@ Route::group(['middleware' => 'cart'], function () {
  */
 Route::get('/', 'HomeController@index');
 
+Route::post('/HomeSearch','HomeController@HomeSearch')->name('HomeSearch');
+	
 Route::post('/store-review','HomeController@store')->name('store-review');
 
 Route::get('/readReview','HomeController@readReview')->name('readReview');
@@ -34,6 +36,8 @@ Route::resource('/products', 'Products\ProductController');
 	
 Route::post('/low','Products\ProductController@low');
 	
+Route::post('/rangePrice','Products\ProductController@rangePrice');
+	
 Route::get('/getSide','Products\ProductController@getSide');	
 	
 Route::get('/product-details/{id}', 'Products\ProductController@productDetails')->name('product-details');
@@ -44,7 +48,7 @@ Route::get('/cart/addItem/{id}', 'Products\CartController@addItem');
 
 Route::put('/cart/update/{id}', 'Products\CartController@update');
 
-Route::get('/cart/remove/{id}', 'Products\CartController@destroy');
+Route::get('/cart/remove', 'Products\CartController@remove');
 
 Route::get('/check-out', 'Products\CheckoutController@index');
 

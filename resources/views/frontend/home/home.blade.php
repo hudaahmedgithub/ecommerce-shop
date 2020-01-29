@@ -118,51 +118,34 @@
                   <div class="header">
                     <h4>Search Now</h4>
                   </div>
-                  <div class="in-a">
-                  <input type="text" placeholder="Search" style="width: 268px;border: unset;padding: 7px;padding-left: 10px">
+				<form action="{{route('HomeSearch')}}" method="post">	{{csrf_field()}}
+              
+       <div class="in-a">
+                  <input type="text" placeholder="Search" style="width: 268px;border: unset;padding: 7px;padding-left: 10px" name="search">
                   <i class="fas fa-search text-secondary" aria-hidden="true"></i>
                 </div>
                 <div class="in-a">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Brand <span>1</span>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                </div>
-                
+                   
+					<select name="brand"style="width: 268px;border: unset;padding: 7px;padding-left: 10px">
+							@foreach($categories as $cat)
+                          <option value="{{$cat->id}}">{{$cat->name}}</option>
+                          @endforeach
+								</select>
+					
+					</div>
+					
                     
                       <div class="progress-price">
                           <h4>price</h4>
-                          <input type="range" class="custom-range" min="0" max="1000" step="1" id="customRange2">
-                          <p>EGP <span>0</span></p><p>EGP <span>1000</span></p>
+                          <input type="range" class="custom-range" min="0" max="1000" step="1" id="customRange2" name="price">
+						  
+                          <p>EGP <span>{{$min}}</span></p><p>EGP <span>{{$max}}</span></p>
                           
                       </div>
-                        <!--div class="in-a">
-                        <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Time
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                  </div-->
-                <button class="mybtn cclr">Purchase</button>
-                <button class="lstbtn"><i class="fas fa-heart" aria-hidden="true"></i> Add to Wishlist</button>
-                <div class="small"> <small>no money gained in this project</small> </div>
-                </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </section>
+					<span id="priceNum"></span>
+					<button class="mybtn cclr">Purchase</button>
+					</form></div></div>
+			  </div></div>
       <!-- End About -->
 
       <!-- Start Products View -->
@@ -339,7 +322,13 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-
+$('#customRange2').change(function(){
+	price=$('#customRange2').val();
+	$('#priceNum').html(price);
+	$('#priceNum').val('');
+	
+ });
+ 
 $(document).on('click','#addReview',function(e){
 			e.preventDefault();
 			var email=$('#email').val();

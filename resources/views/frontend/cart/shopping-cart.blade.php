@@ -28,12 +28,14 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
                 }
             });
             <?php } ?>
-	$(document).on('click','#delete',function(){
+	$(document).on('click','#deleteCart',function(){
 	id=$(this).data('id');
 		console.log(id);
-	$.post('cart/remove',{id:id},function(){
+	$.get('cart/remove',{id:id},function(){
+		console.log('sdfghj');
 		alert('do you want to delete');
-		$('#data').html('');
+		$('#dataCart').html('');
+		$('#cart_items').show();
 	  
 	})
 })
@@ -66,8 +68,10 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
                                 {{session('error')}}
                             </div>
                         @endif
+	<div id="dataCart">
         <div class="shopping-cart">
             <div class="container">
+			
                 <div class="row">
 					<?php $count =1;
 					?> 
@@ -103,14 +107,16 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
                                 <p>color: {{$cart->attributes->color}}</p>
 							
                             </div>
-                           <a href="javascript:void(0)" class="_deleteCart" data-id="{{$cart['id']}}"> <i class="fa fa-trash"></i>delete </a>
+                           <a  id="deleteCart" data-id="{{$cart['id']}}"> <i class="fa fa-trash"></i>delete </a>
                         </div>
+						</div>
 		</div>
 								
 				<?php $count++;?>
                     
        	@endforeach 
 			    <?php } ?>
+				</div>
                     <div class="col-md-4 right-side">
                         <div class="total-cost">
 						<p>Total Price: {{Cart::getTotal()}}</p>
@@ -125,6 +131,7 @@ $('#upCart<?php echo $i;?>').on('change keyup', function(){
 			
                 </div>
             </div>
+
         </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -45,10 +45,11 @@ class CartController extends Controller
 		}
 		
 	}
-	public function destroy($id)
+	public function remove(Request $request)
 	{
-		Cart::remove($id);
-		return back();
+		Cart::remove($request->id);
+		return response()->json();
+	
 	}
 	
 }

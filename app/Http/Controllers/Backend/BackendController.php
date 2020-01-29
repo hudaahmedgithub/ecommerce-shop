@@ -96,6 +96,7 @@ class BackendController extends Controller
         $request = get_request($this->store_request);
 
         if ($request->ajax()) {
+			
             $record = $this->model::create($request->all());
 
             # if the form has multiple images

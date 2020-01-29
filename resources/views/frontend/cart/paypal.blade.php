@@ -7,7 +7,7 @@
     <input type="hidden" name="item_name_{{$count}}" value="{{$cartItem->name}}">
     <input type="hidden" name="item_number_{{$count}}" value="{{$cartItem->id}}">
     <input type="hidden" name="quantity_{{$count}}" value="{{$cartItem->qty}}">
-    <input type="hidden" name="amount_{{$count}}" value="{{$cartItem->price}}">
+    <input type="hidden" name="amount_{{$count}}" value="{{$cartItem->price*$cartItem->quantity}}">
     <input type="hidden" name="shipping_{{$count}}" value="0">
     <input type="hidden" name="tax_{{$count}}" value="0.12">
     <br>
